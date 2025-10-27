@@ -1,7 +1,8 @@
 set(srcs
     "transport.c"
     "transport_ssl.c"
-    "transport_internal.c")
+    "transport_internal.c"
+    "transport_resources.c")
 
 if(CONFIG_LWIP_IPV4)
 list(APPEND srcs

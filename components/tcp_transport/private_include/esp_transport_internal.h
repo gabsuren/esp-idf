@@ -54,6 +54,12 @@ struct esp_transport_item_t {
     get_socket_func        _get_socket;             /*!< Function returning the transport's socket */
     esp_transport_keep_alive_t *keep_alive_cfg;     /*!< TCP keep-alive config */
     struct esp_foundation_transport *foundation;          /*!< Foundation transport pointer available from each transport */
+    
+    // PHASE 1: Chain operations support
+    esp_transport_handle_t parent;  /*!< Parent transport in chain (NULL if base transport).
+                                         Used by chain operations (esp_transport_destroy_chain, etc.)
+                                         to automatically propagate operations up the transport stack.
+                                         For example: WebSocket has parent=SSL, SSL has parent=TCP, TCP has parent=NULL */
 
     STAILQ_ENTRY(esp_transport_item_t) next;
 };
